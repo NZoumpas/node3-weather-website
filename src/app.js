@@ -1,0 +1,137 @@
+const path = require('path')
+const express = require('express')
+const hbs = require('hbs')
+const geocode = require('./utils/geocode')
+const forecast = require('./utils/forecast')
+
+
+// console.log(__dirname)
+// console.log(path.join(__dirname, '../public'))//οσες φορεσ γραψω ../ με παει μια διαδρομμη πισω
+
+const app = express()
+
+//define paths for express config - ορίστε διαδρομές για express διαμόρφωση
+const publicDirectoryPath = path.join(__dirname, '../public')
+const viewsPath = path.join(__dirname, '../templates/views')
+const partialsPath = path.join(__dirname, '../templates/partials')
+
+
+
+//setup handlebars engine and views location - ρύθμιση κινητήρα τιμονιού και τοποθεσία προβολών
+app.set('view engine', 'hbs')
+app.set('views', viewsPath)
+hbs.registerPartials(partialsPath)
+
+//setup static directory to serve - εγκατάσταση στατικού καταλόγου για προβολή
+app.use(express.static(publicDirectoryPath))
+
+
+app.get('', (req, res) => {
+    res.render('index', {
+        title:'Weather!',
+        name: 'Nikos Zoumpas',
+    })
+})
+
+app.get('/about', (req, res) => {
+    res.render('about', {
+        title: 'About page!',
+        name: 'Nikos Zoumpas'
+    })
+})
+
+app.get('/help', (req, res) => {
+    res.render('help', {
+        message: 'It is a long established fact that a reader will be distracted',
+        title: 'Help',
+        name: 'Nikos Zoumpas'
+
+    })
+})
+//Require geocode/forecast into app.js
+//use the address to geocode
+//Use the coordinates to get forecast
+//send back the real forecast and location
+
+
+app.get('/weather', (req, res) => {
+    if (!req.query.address) {
+        return res.send({
+            error:'You must provide a address'
+        })
+    }
+    geocode(req.query.address, (error, { latitude, longitude, location } = {}) => {
+        if (error) {
+            return res.send({ error })
+        }
+        forecast (latitude, longitude, (error, forecastData) => {
+            if (error) {
+                return res.send(error)
+            }
+            res.send({
+                forecast: forecastData,
+                location,
+                address: req.query.address
+            })
+        })
+    })
+})
+
+
+
+
+
+
+//     res.send([{
+//         forecast:'it is snowing'
+//     }, {
+//         location: 'Philadelphia'
+//     }, {
+//         address: req.query.address
+//     }])
+
+
+app.get('/products', (req, res) => {
+    if (!req.query.search) {
+        return res.send({
+            error: 'You must provide a search term'
+        })
+    }
+    console.log(req.query.search )
+    res.send({
+        products: []
+    })
+})
+
+
+app.get('/help/*', (req, res) => {
+    res.render('404', {
+        title: '404',
+        name: 'Nikos Zoump',
+        errorMessage: 'Help article not found'
+    })
+})
+
+app.get('*', (req, res) => {
+    res.render('404', {
+        title: '404',
+        name: 'Nikos Zoump',
+        errorMessage: 'Page not found.'
+    })
+})
+app.listen(3000, () => {
+    console.log('Server is up on port 3000.')
+})
+
+
+// app.get('', (req, res) => {//Aυτό μας επιτρέπει να διαμορφώσουμε τι πρέπει να έχει ο διακομιστής method app.get()
+//     res.send('<h1>Weather</h1>')
+// })
+//json file
+// app.get('/help', (req, res) => {
+//     res.send([{
+//         name: 'Nikos'
+//     }, {
+//         name: 'Korina'
+//     }])
+// })
