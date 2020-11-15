@@ -11,7 +11,7 @@ const forecast = (latitude, longitude, callback) => {
             callback('Unable to find location.Try another search!', undefined)
         } else {
             callback(undefined, response.body.current.weather_descriptions[0] + ". It is currently  " + response.body.current.temperature +
-            " degress out.")
+            " degress out.With wind speed "+ response.body.current.wind_speed + " and Wind degree " + response.body.current.wind_degree + " ." ) 
         }
     })
 }
