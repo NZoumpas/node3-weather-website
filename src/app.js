@@ -128,11 +128,4 @@ app.listen(port, () => {
 // app.get('', (req, res) => {//Aυτό μας επιτρέπει να διαμορφώσουμε τι πρέπει να έχει ο διακομιστής method app.get()
 //     res.send('<h1>Weather</h1>')
 // })
-//json file
-// app.get('/help', (req, res) => {
-//     res.send([{
-//         name: 'Nikos'
-//     }, {
-//         name: 'Korina'
-//     }])
-// })
+
