@@ -13,12 +13,10 @@ const port = process.env.PORT || 3000
 const publicDirectoryPath = path.join(__dirname, '../public')
 const viewsPath = path.join(__dirname, '../templates/views')
 const partialsPath = path.join(__dirname, '../templates/partials')
-
 //setup handlebars engine and views location - ρύθμιση κινητήρα τιμονιού και τοποθεσία προβολών
 app.set('view engine', 'hbs')
 app.set('views', viewsPath)
 hbs.registerPartials(partialsPath)
-
 //setup static directory to serve - εγκατάσταση στατικού καταλόγου για προβολή
 app.use(express.static(publicDirectoryPath))
 
@@ -31,14 +29,14 @@ app.get('', (req, res) => {
 })
 app.get('/about', (req, res) => {
     res.render('about', {
-        title: 'About page!',
+        title: 'About!',
         name: 'Nikos Zoumpas'
     })
 })
 app.get('/help', (req, res) => {
     res.render('help', {
         message: 'It is a long established fact that a reader will be distracted',
-        title: 'Help',
+        title: 'Help!',
         name: 'Nikos Zoumpas'
 
     })
