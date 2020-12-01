@@ -43,10 +43,6 @@ app.get('/help', (req, res) => {
 
     })
 })
-//Require geocode/forecast into app.js
-//use the address to geocode
-//Use the coordinates to get forecast
-//send back the real forecast and location
 
 app.get('/weather', (req, res) => {
     if (!req.query.address) {
@@ -100,9 +96,3 @@ app.get('*', (req, res) => {
 app.listen(port, () => {
     console.log('Server is up on port ' + port)
 })
-
-
-// app.get('', (req, res) => {//Aυτό μας επιτρέπει να διαμορφώσουμε τι πρέπει να έχει ο διακομιστής method app.get()
-//     res.send('<h1>Weather</h1>')
-// })
-
