@@ -19,24 +19,3 @@ const geocode = (address, callback) => {
 }
 
 module.exports = geocode
-
-
-//setup an error handler for low-level errors
-//geocoding
-//address -> Lat/Long -> Weather
-// const geocodeUrl = 'https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1Ijoibmlrb2xhb3N6b3VtcCIsImEiOiJja2d2NWJnc3owaXRvMnlwanRwdmFwbTIxIn0.8TJtRzKjRISh-nNYBm4Z8g&limit=1'
-// //latitude = γεωγραφικό πλάτος
-// //longtitude = γεωγραφικό μήκος
-// request({ url: geocodeUrl, json:true }, (error, response) => {
-//     if (error) {
-//         console.log('Unable to connect to weather service!')
-//     } else if (response.body.features.length === 0) {
-//         console.log('Unable to find location!')
-//     } else {
-//         const latitude =  response.body.features[0].center[1]
-//     const longitude = response.body.features[0].center[0]
-//     console.log("The latitude is: " + latitude + " ,and longtitube is:  " + longtitude)
-
-//     }
-    
-// })

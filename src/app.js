@@ -3,8 +3,6 @@ const express = require('express')
 const hbs = require('hbs')
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
-
-
 // console.log(__dirname)
 // console.log(path.join(__dirname, '../public'))//οσες φορεσ γραψω ../ με παει μια διαδρομμη πισω
 
@@ -15,8 +13,6 @@ const port = process.env.PORT || 3000
 const publicDirectoryPath = path.join(__dirname, '../public')
 const viewsPath = path.join(__dirname, '../templates/views')
 const partialsPath = path.join(__dirname, '../templates/partials')
-
-
 
 //setup handlebars engine and views location - ρύθμιση κινητήρα τιμονιού και τοποθεσία προβολών
 app.set('view engine', 'hbs')
@@ -33,14 +29,12 @@ app.get('', (req, res) => {
         name: 'Nikos Zoumpas',
     })
 })
-
 app.get('/about', (req, res) => {
     res.render('about', {
         title: 'About page!',
         name: 'Nikos Zoumpas'
     })
 })
-
 app.get('/help', (req, res) => {
     res.render('help', {
         message: 'It is a long established fact that a reader will be distracted',
@@ -53,7 +47,6 @@ app.get('/help', (req, res) => {
 //use the address to geocode
 //Use the coordinates to get forecast
 //send back the real forecast and location
-
 
 app.get('/weather', (req, res) => {
     if (!req.query.address) {
@@ -78,20 +71,6 @@ app.get('/weather', (req, res) => {
     })
 })
 
-
-
-
-
-
-//     res.send([{
-//         forecast:'it is snowing'
-//     }, {
-//         location: 'Philadelphia'
-//     }, {
-//         address: req.query.address
-//     }])
-
-
 app.get('/products', (req, res) => {
     if (!req.query.search) {
         return res.send({
@@ -103,8 +82,6 @@ app.get('/products', (req, res) => {
         products: []
     })
 })
-
-
 app.get('/help/*', (req, res) => {
     res.render('404', {
         title: '404',
